@@ -7,6 +7,10 @@ const MONGO_URL = 'mongodb://127.0.0.1:27017/Wonderlust';
 const Listing = require("./model/listing.js");
 const path = require('path');
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
+
 async function main(){
     await mongoose.connect(MONGO_URL);
 }
@@ -21,24 +25,25 @@ app.listen(3000, () => {
 });
 
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+
 
 app.get('/', (req, res) => {
     res.send('hello root');
 });
 
-
+//Index route 
 app.get("/listings", async (req, res) => {
   const allListings = await listing.find({});
   res.render("index.ejs", { listings: allListings });
 });
 
 
-
-
-
-
+//Show route 
+app.get("/listings/:id", async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("show.ejs", { listing });
+});
 
 
 
