@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 const initData = require("./data.js");
-const listing = require('./model/listing.js');
+const listing = require("../model/listing.js");
     
 const MONGO_URL = 'mongodb://127.0.0.1:27017/Wonderlust';
 
@@ -14,9 +14,11 @@ main().
 
 
 const initDB = async () => {
-    await listings.deleteMany({});
-    await listings.insertMany(initData);
+    await listing.deleteMany({});
+    await listing.insertMany(initData.data);
 
     console.log("Database initialized with sample data");
 }
+
+initDB();
 
