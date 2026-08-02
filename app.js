@@ -5,7 +5,12 @@ const listing = require('./model/listing.js');                      //import the
 const mongoose = require('mongoose');                               //import mongoose module
 const MONGO_URL = 'mongodb://127.0.0.1:27017/Wonderlust';           //set the MongoDB connection URL
 const Listing = require("./model/listing.js");                     //import the listing model
-const path = require('path');                                      //import path module
+const path = require('path'); 
+                                     //import path module
+
+const ejsMate = require('ejs-mate'); //import ejs-mate module for layout support
+
+
 
 //import method-override module to support PUT and DELETE methods in forms
 
@@ -16,11 +21,12 @@ app.use(methodOverride('_method'));
 // set up the view engine and views directory
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.engine("ejs", ejsMate); //use ejs-mate as the template engine
 
 //middleware to parse incoming request bodies
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use(express.static(path.join(__dirname, '/public'))); //serve static files from the public directory
 //database connection
 
 async function main(){

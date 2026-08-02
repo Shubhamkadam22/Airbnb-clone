@@ -1,0 +1,17 @@
+/* body{
+background-color: #66b4d0;
+
+} */
+
+.navbar{
+ height: 5rem;
+ background-color: white;
+}
+
+.fa-house-tsunami{
+  font-size: 2rem;
+}
+.nav-link{
+ color: black !important;
+ font-weight: 600 !important;
+}
