@@ -1,38 +1,31 @@
-const mongoose = require ('mongoose');
-const Schema = mongoose.Schema; 
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const DEFAULT_IMAGE_URL =
+  "https://plus.unsplash.com/premium_photo-1661876449499-26de7959878f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bmF0dXJlJTIwaG91c2V8ZW58MHx8MHx8fDA%3D";
 
 const listingSchema = new Schema({
-
-    title: {
-        type: String, 
-
-    },
-    description: {
-        type: String,
-    },
-   image: {
-  filename: {
+  title: {
     type: String,
-    default: "listingimage",
+    required: true,
   },
-  url: {
-    type: String,
-    default: "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-    set: (v) => v === "" ? "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" : v,
+  description: String,
+  image: {
+    filename: {
+      type: String,
+      default: "listingimage",
+    },
+    url: {
+      type: String,
+      default: DEFAULT_IMAGE_URL,
+      set: (v) => (v === "" ? DEFAULT_IMAGE_URL : v),
+    },
   },
-}, 
-    price: {
-        type: Number, 
-    },
-    location: {
-        type: String, 
-    },
-    country: {
-        type: String,
-    }
+  
+  price: Number,
+  location: String,
+  country: String,
 });
 
-const listings = mongoose.model('listing', listingSchema);
-
-module.exports = listings;
-
+const Listing = mongoose.model("Listing", listingSchema);
+module.exports = Listing;
