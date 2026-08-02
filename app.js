@@ -7,6 +7,9 @@ const MONGO_URL = 'mongodb://127.0.0.1:27017/Wonderlust';
 const Listing = require("./model/listing.js");
 const path = require('path');
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -24,9 +27,7 @@ app.listen(3000, () => {
     
 });
 
-
-
-
+//main page route
 app.get('/', (req, res) => {
     res.send('hello root');
 });
@@ -34,22 +35,47 @@ app.get('/', (req, res) => {
 //Index route 
 app.get("/listings", async (req, res) => {
   const allListings = await listing.find({});
-  res.render("index.ejs", { listings: allListings });
+  res.render("listings/index.ejs", { listings: allListings });
 });
+
+//New Route 
+app.get("/listings/new" , (req , res) => {
+ res.render("listings/new.ejs");
+
+}); 
 
 
 //Show route 
 app.get("/listings/:id", async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
-    res.render("show.ejs", { listing });
+    res.render("listings/show.ejs", { listing });
 });
 
 
+// create route 
+
+app.post("/listings", async (req, res) => {
+const newlisting = new Listing(req.body.listing);
+await newlisting.save();
+res.redirect("/listings");
+});
 
 
+//Edit route 
 
+app.get("/listings/:id/edit", async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/edit.ejs", { listing });
+});
 
+//Update route
+app.put("/listings/:id", async (req, res) => {
+    let { id } = req.params;
+    const updatedListing = await Listing.findByIdAndUpdate(id, req.body.listing, { new: true });
+    res.redirect(`/listings/${id}`);
+});
 
 
 
