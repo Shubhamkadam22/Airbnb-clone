@@ -133,4 +133,8 @@ object-fit: cover !important;
   background-color: white; 
 }
 
-
+/* show page */
+.show-img{
+  height: 30rem;
+  width: 100%;
+}

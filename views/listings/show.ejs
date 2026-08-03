@@ -1,6 +1,19 @@
 <% layout('layouts/boilerplate') %>
-<body>
+
+<div class="row">
+    <div class="col-8 offset-2 mt-5">
     <h3>Listing Details</h3>
+    <div class="">
+<div class="card">
+  <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
+  
+  <div class="card-body">
+    <p class="card-text"> <%= listing.title %></p>
+  </div>
+
+
+</div>
+
     <ul>
         <li>Listing Title: <%= listing.title %></li>
         <li>Description: <%= listing.description %></li>
@@ -20,4 +33,6 @@
     <button type="submit">Delete Listing</button>
 </form>
 
-</body>
+
+    </div>
+</div>
