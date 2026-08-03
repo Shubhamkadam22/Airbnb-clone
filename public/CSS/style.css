@@ -4,6 +4,29 @@ body {
     font-optical-sizing: auto;
     font-weight: 700; /* Regular default */
     font-style: normal;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container {
+   flex: 1;
+}
+
+/* new listing btn */
+.btn {
+    background-color: #ff385c;
+    border: none;
+    color: white;
+}
+
+.btn2 {
+    background-color: #ff385c;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 /* Font Weight Utility Classes */
@@ -109,3 +132,5 @@ object-fit: cover !important;
   opacity: 0.2;
   background-color: white; 
 }
+
+
